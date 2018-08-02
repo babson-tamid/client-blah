@@ -9,35 +9,47 @@ import {FormsModule} from '@angular/forms';
 })
 export class UserComponent implements OnInit {
 
-  signUpUser:any = {};
+  checkemailUser:any = {};
+
+  // signUpUser:any = {};
 
   theActualUser:any = {};
 
-  loginUser: any = {};
+  // loginUser: any = {};
 
   theError:any;
 
 
   constructor(private authService: AuthService) { }
 
-  tryToSignUp(){
-    console.log(this.signUpUser);    
-    this.authService.signup(this.signUpUser)
+  checkEmail(){
+    console.log(this.checkemailUser);    
+    this.authService.checkemail(this.checkemailUser)
     .subscribe(
       userObjFromApi =>{ this.theActualUser = userObjFromApi});
       error=>{this.theError = error}
+
+    console.log(this.checkemailUser);
   }
 
-  tryToLogIn(){
-    console.log(this.loginUser);
-    this.authService.login(this.loginUser)
-    .subscribe(res=>{this,this.theActualUser = res});
-  }
+  // tryToSignUp(){
+  //   console.log(this.signUpUser);    
+  //   this.authService.signup(this.signUpUser)
+  //   .subscribe(
+  //     userObjFromApi =>{ this.theActualUser = userObjFromApi});
+  //     error=>{this.theError = error}
+  // }
 
-  logMeOut(){
-    this.authService.logout()
-    .subscribe(res =>{this.theActualUser = {}})
-  }
+  // tryToLogIn(){
+  //   console.log(this.loginUser);
+  //   this.authService.login(this.loginUser)
+  //   .subscribe(res=>{this,this.theActualUser = res});
+  // }
+
+  // logMeOut(){
+  //   this.authService.logout()
+  //   .subscribe(res =>{this.theActualUser = {}})
+  // }
 
   ngOnInit() {
   }

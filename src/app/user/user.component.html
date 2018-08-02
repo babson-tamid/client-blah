@@ -7,6 +7,18 @@
 <button (click)="logMeOut()">Log Out</button>
 
 
+<form (submit)="checkemail()">
+  
+  <label> Email </label>
+  <input type="text" [(ngModel)]="checkemailUser.email" name="email"/>
+  <br>
+
+  
+  <!-- <button (click)="login()"> login </button> -->
+  <button> Check Email </button>
+</form>
+
+
 <h2>Signup Form</h2>
 
 <form (submit)="tryToSignUp()">
