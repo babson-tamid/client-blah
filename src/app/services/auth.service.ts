@@ -7,13 +7,12 @@ import { Observable } from 'rxjs/Rx';
 @Injectable()
 export class AuthService {
 
-  errorMessage:any;
 
   constructor(private http: Http) { }
 
   handleError(e) {
-    this.errorMessage = e.json.message;
-    return Observable.throw(e.json().message);
+    console.log(e);
+     return Observable.throw(e.json().message);
   }
 
   checkemail(user) {
@@ -23,26 +22,33 @@ export class AuthService {
   }
 
   signup(user) {
-    return this.http.post(`http://localhost:3000/api/signup`, user)
+    console.log('hey: ', user)
+    return this.http.post(`http://localhost:3000/api/user/${user._id}/finish-signup`, user, {withCredentials: true})
       .map(res => res.json())
       .catch(this.handleError);
   }
 
+  // apply(user){
+
+  // }
+
   login(user) {
-    return this.http.post(`http://localhost:3000/api/login`, user)
+    return this.http.post(`http://localhost:3000/api/login`, user, {withCredentials: true})
       .map(res => res.json())
       .catch(this.handleError);
   }
 
   logout() {
-    return this.http.post(`http://localhost:3000/api/logout`, {})
+    return this.http.post(`http://localhost:3000/api/logout`, {}, {withCredentials: true} )
       .map(res => res.json())
       .catch(this.handleError);
   }
 
   isLoggedIn() {
-    return this.http.get(`http://localhost:3000/api/loggedin`)
-      .map(res => res.json())
+    return this.http.get(`http://localhost:3000/api/loggedin`, {withCredentials: true})
+      .map((res) => {
+        return JSON.parse(res._body)
+      })
       .catch(this.handleError);
   }
 
@@ -51,4 +57,8 @@ export class AuthService {
       .map(res => res.json())
       .catch(this.handleError);
   }
+
+
+
+
 }
