@@ -1,58 +1,71 @@
 <h1> Authentication Sample </h1>
+<br>
+
 <div *ngIf="theActualUser">
 
-  User: {{theActualUser | json}}
+  User: {{theActualUser.email}}
 
 </div>
-<button (click)="logMeOut()">Log Out</button>
+<br>
 
+<!-- <button (click)="logMeOut()">Log Out</button> -->
+<br>
+<br>
 
-<form (submit)="checkemail()">
+<div *ngIf="theActualUser">
+<form (ngSubmit)="checkEmail()">
   
   <label> Email </label>
   <input type="text" [(ngModel)]="checkemailUser.email" name="email"/>
   <br>
-
-  
-  <!-- <button (click)="login()"> login </button> -->
   <button> Check Email </button>
 </form>
+</div>
 
-
+<div *ngIf="theActualUser">
 <h2>Signup Form</h2>
 
-<form (submit)="tryToSignUp()">
+<form (ngSubmit) = "tryToSignUp()" method="post" enctype="multipart/form-data">
   
-  <label> Username </label>
-  <input type="text" [(ngModel)]="signUpUser.email" name="email"/>
+  <label> Email Address </label>
+  <input type="text" [(ngModel)]="theActualUser.email" name="email"/>
   <br>
   
   <label> Password </label>
-  <input type="password" [(ngModel)]="signUpUser.password" name="password"/>
+  <input type="password" [(ngModel)]="password" name="password"/>
+  <br>
+
+  <label> Name </label>
+  <input type="text" [(ngModel)]="theActualUser.name" name="name"/>
+  <br>
+
+  <label> Graduation Date </label>
+  <input type="text" [(ngModel)]="theActualUser.gradDate" name="gradDate"/>
+  <br>
+
+  <label> Phone Number </label>
+  <input type="text" [(ngModel)]="theActualUser.phoneNum" name="phoneNum"/>
+  <br>
+
+  <label> Resume </label>
+  <input type="file" name="images" ng2FileSelect [uploader]="uploader" />
+  <br>
+
+  <label> Profile Pic </label>
+  <input type="file" name="images" ng2FileSelect [uploader]="uploader" />
   <br>
   
-  <!-- <button (click)="login()"> login </button> -->
-  <button> signup </button>
+  <button> Register Now! </button>
 </form>
 
+</div>
 <hr>
 
-<h2>Login Form</h2>
-
-<form (submit)="tryToLogIn()">
-  
-  <label> Username </label>
-  <input type="text" [(ngModel)]="loginUser.email" name="email"/>
-  <br>
-  
-  <label> Password </label>
-  <input type="password" [(ngModel)]="loginUser.password" name="password"/>
-  <br>
-  
-  <!-- <button (click)="login()"> login </button> -->
-  <button> sign in </button>
-</form>
 
 <div *ngIf="theError">error:{{theError}}</div>
+
+<br>
+<hr>
+<button (click)="logMeOut()">Log Out</button>
 
 
